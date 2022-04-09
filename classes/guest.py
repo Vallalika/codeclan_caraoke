@@ -8,3 +8,6 @@ class Guest:
     def pay_entry_fee(self, room):
         if self.money >= room.entry_fee:
             self.money -= room.entry_fee
+    
+    def song_cheer(self):
+        return "Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!"
