@@ -1,4 +1,4 @@
-from classes.tab import Tab
+from classes.item import Item
 
 class Room:
 
@@ -10,16 +10,16 @@ class Room:
         self.tab_list = []
         self.playlist = []
         self.money_made = 0.00
-        self.entry_fee = 10.00
+        self.entry_fee = Item("Entry Fee", "Service", 10.00)
     
     def guest_checkin(self, guest):
-        if (self.capacity > self.number_of_guests_in) and (guest.money >= self.entry_fee):
+        if (self.capacity > self.number_of_guests_in) and (guest.money >= self.entry_fee.price):
             self.number_of_guests_in += 1
             self.guest_list.append(guest)
             # self.guest.tab = Tab(guest)
             # self.guest.tab.
             guest.pay_entry_fee(self)
-            self.money_made += self.entry_fee
+            self.money_made += self.entry_fee.price
             if guest.favourite_song in self.playlist:
                 guest.has_cheered = True
                 return guest.song_cheer()
