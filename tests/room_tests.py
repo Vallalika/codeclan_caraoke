@@ -176,3 +176,25 @@ class TestRoom(unittest.TestCase):
         self.assertEqual({"Entry Fee": 1, "Chips": 1}, self.jane.tab.bought_items)
         self.assertEqual(14.00, self.jane.tab.total_spent)
         self.assertEqual([self.jane.tab], self.room_1.tab_list)
+    
+    # @unittest.skip
+    def test_sell_item_NOT_enough_money(self):
+        self.room_1.guest_checkin(self.kerry)
+        self.assertEqual({"Entry Fee": 1}, self.kerry.tab.bought_items)
+        self.room_1.sell_item(self.kerry, self.gin_tonic)
+        self.assertEqual(4.00, self.kerry.money)
+        self.assertEqual(16.00, self.room_1.money_made)
+        self.assertEqual({"Entry Fee": 1, "Gin Tonic": 1}, self.kerry.tab.bought_items)
+        self.assertEqual(16.00, self.kerry.tab.total_spent)
+        self.assertEqual([self.kerry.tab], self.room_1.tab_list)
+        self.room_1.sell_item(self.kerry, self.gin_tonic)
+        self.assertEqual(4.00, self.kerry.money)
+        self.assertEqual(16.00, self.room_1.money_made)
+        self.assertEqual({"Entry Fee": 1, "Gin Tonic": 1}, self.kerry.tab.bought_items)
+
+    # @unittest.skip
+    def test_tab_tracking_on_customer_check_out(self):
+        self.room_1.guest_checkin(self.kerry)
+        self.room_1.sell_item(self.kerry, self.gin_tonic)
+        self.room_1.guest_checkout(self.kerry)
+        self.assertIsNone(self.kerry.tab)
