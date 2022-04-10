@@ -20,8 +20,8 @@ class Room:
             guest.tab = Tab(guest)
             guest.pay_entry_fee(self)
             self.money_made += self.entry_fee.price
-            # add to tab
-
+            guest.tab.add_to_tab(self.entry_fee)
+            self.tab_list.append(guest.tab)
             if guest.favourite_song in self.playlist:
                 guest.has_cheered = True
                 return guest.song_cheer()
@@ -31,6 +31,7 @@ class Room:
     def guest_checkout(self, guest):
         self.number_of_guests_in -= 1
         self.guest_list.remove(guest)
+        self.tab_list.remove(guest.tab)
     
     def add_song(self, song):
         self.playlist.append(song)
