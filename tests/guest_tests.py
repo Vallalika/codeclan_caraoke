@@ -2,6 +2,7 @@ import unittest
 from classes.guest import Guest
 from classes.room import Room
 from classes.song import Song
+from classes.tab import Tab
 
 class TestGuest(unittest.TestCase):
     
@@ -14,6 +15,7 @@ class TestGuest(unittest.TestCase):
         self.assertEqual("Jane",self.jane.name)
         self.assertEqual(50.00,self.jane.money)
         self.assertEqual(self.lazy_song,self.jane.favourite_song)
+        self.assertEqual(False, self.jane.has_cheered)
     
     # @unittest.skip
     def test_pay_entry_fee(self):
@@ -24,4 +26,4 @@ class TestGuest(unittest.TestCase):
     def test_song_cheer(self):
         self.room_1.guest_checkin(self.jane)
         self.room_1.add_song(self.lazy_song)
-        self.assertEqual("Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!", self.jane.song_cheer())
+        self.assertEqual("Jane: Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!", self.jane.song_cheer())

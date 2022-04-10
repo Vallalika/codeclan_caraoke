@@ -2,6 +2,7 @@ import unittest
 from classes.guest import Guest
 from classes.room import Room
 from classes.song import Song
+from classes.tab import Tab
 
 
 class TestSong(unittest.TestCase):
@@ -14,5 +15,3 @@ class TestSong(unittest.TestCase):
         self.assertEqual("One Headlight",self.one_headlight.name)
         self.assertEqual("The Wallflowers",self.one_headlight.artist)
         self.assertEqual("Rock",self.one_headlight.genre)
-
-        
