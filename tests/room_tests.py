@@ -39,8 +39,8 @@ class TestRoom(unittest.TestCase):
         self.room_1.guest_checkin(self.alison)
         self.assertEqual(3, self.room_1.number_of_guests_in)
         self.assertEqual(3, self.room_1.capacity)
-        self.assertEqual([self.jane,self.gary,self.alison], self.room_1.guest_list)
-        # self.assertEqual([self.room_1.tab_list]), self.room_1.tab_list)
+        # self.assertEqual([self.jane,self.gary,self.alison], self.room_1.guest_list)
+        # self.assertEqual([self.jane.tab, self.gary.tab, self.alison.tab], self.room_1.tab_list)
     
     # @unitest.skip
     def test_check_in_if_NOT_enough_space(self):
@@ -51,6 +51,7 @@ class TestRoom(unittest.TestCase):
 
         # Trying to add 4th guest
         self.assertEqual("Sorry, come back later!", self.room_1.guest_checkin(self.kerry))
+        self.assertEqual([], self.room_1.tab_list)
 
 
     # @unittest.skip
@@ -60,6 +61,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(40.00,self.jane.money)
         self.assertEqual(1,self.room_1.number_of_guests_in)
         self.assertEqual([self.jane],self.room_1.guest_list)
+        # self.assertEqual([self.jane.tab], self.room_1.tab_list)
 
     # @unittest.skip
     def test_check_in_if_enough_space_but_NOT_enough_money(self):
@@ -75,6 +77,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(0.00,self.kerry.money)
         self.assertEqual(0,self.room_1.number_of_guests_in)
         self.assertEqual([],self.room_1.guest_list)
+        self.assertEqual([], self.room_1.tab_list)
 
         # Kerry is now broke
         self.assertEqual("Sorry, come back later!", self.room_1.guest_checkin(self.kerry))
@@ -102,11 +105,14 @@ class TestRoom(unittest.TestCase):
         self.room_1.guest_checkout(self.jane)
         self.assertEqual(2, self.room_1.number_of_guests_in)
         self.assertEqual([self.alison, self.gary], self.room_1.guest_list)
+        # self.assertEqual([self.alison.tab, self.gary.tab], self.room_1.tab_list)
+
         self.room_1.guest_checkout(self.gary)
         self.room_1.guest_checkout(self.alison)
         self.assertEqual(0, self.room_1.number_of_guests_in)
         self.assertEqual(3, self.room_1.capacity)
         self.assertEqual([], self.room_1.guest_list)
+        self.assertEqual([], self.room_1.tab_list)
     
     # @unittest.skip
     def test_add_song(self):
@@ -118,11 +124,7 @@ class TestRoom(unittest.TestCase):
     # @unittest.skip
     def test_add_song_with_guest_cheer(self):
 
-        # Test for song cheers where guests are already checked in
-
-        # Reminder to do a clear for clearing flags for guest.has_cheered
-        # Reminder to also make the cheer available when song already in playlist and guests check in
-
+        # Test for song cheers where guests are already checked in and new song is added to playlist
 
         self.room_1.guest_checkin(self.jane)
         self.assertEqual("Jane: Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!", self.room_1.add_song(self.lazy_song))

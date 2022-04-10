@@ -8,8 +8,7 @@ class Guest:
         self.tab = None
     
     def pay_entry_fee(self, room):
-        if self.money >= room.entry_fee.price:
-            self.money -= room.entry_fee.price
+        self.money -= room.entry_fee.price
 
     def song_cheer(self):
         return self.name+": Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!"
