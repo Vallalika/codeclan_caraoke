@@ -32,7 +32,17 @@ class Room:
         self.number_of_guests_in -= 1
         self.guest_list.remove(guest)
         self.tab_list.remove(guest.tab)
+        # Update or delete the tab_list object itself? Thought not the customer(money)?
+        # Reset customer tab to None
+        # Test this
     
+    def sell_item(self, guest, item):
+        if guest.money >= item.price:
+            guest.buy_item(item)
+            self.money_made += item.price
+            guest.tab.add_to_tab(item)
+
+
     def add_song(self, song):
         self.playlist.append(song)
         for guest in self.guest_list:

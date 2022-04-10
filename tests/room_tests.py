@@ -24,6 +24,10 @@ class TestRoom(unittest.TestCase):
         self.alison = Guest("Alison", 40.00, self.billie_jean)
         self.kerry = Guest("Kerry", 20.00, self.living_on_a_prayer)
 
+        # Foods
+        self.chips = Item("Chips", "Food", 4.00)
+        self.gin_tonic = Item("Gin Tonic", "Drink", 6.00)
+
     def test_room_setup(self):
         self.assertEqual("Room 1", self.room_1.name)
         self.assertEqual(3, self.room_1.capacity)
@@ -47,6 +51,9 @@ class TestRoom(unittest.TestCase):
 
         # Checking tab list now contains jane's, gary's and alison's tabs
         self.assertEqual([self.jane.tab, self.gary.tab, self.alison.tab], self.room_1.tab_list)
+
+        # Checking Jane's tab was updated
+        self.assertEqual({"Entry Fee": 1}, self.jane.tab.bought_items)
     
     # @unitest.skip
     def test_check_in_if_NOT_enough_space(self):
@@ -158,3 +165,14 @@ class TestRoom(unittest.TestCase):
         self.room_1.clear_playlist()
         self.assertEqual([], self.room_1.playlist)
         self.assertEqual(False, self.kerry.has_cheered)
+    
+    # @unittest.skip
+    def test_sell_item_enough_money(self):
+        self.room_1.guest_checkin(self.jane)
+        self.assertEqual({"Entry Fee": 1}, self.jane.tab.bought_items)
+        self.room_1.sell_item(self.jane, self.chips)
+        self.assertEqual(36.00, self.jane.money)
+        self.assertEqual(14.00, self.room_1.money_made)
+        self.assertEqual({"Entry Fee": 1, "Chips": 1}, self.jane.tab.bought_items)
+        self.assertEqual(14.00, self.jane.tab.total_spent)
+        self.assertEqual([self.jane.tab], self.room_1.tab_list)

@@ -24,11 +24,17 @@ class TestTab(unittest.TestCase):
     # @unittest.skip
     def test_add_to_tab(self):
         self.janes_tab.add_to_tab(self.chips)
-        self.assertEqual({self.chips.name: 1}, self.janes_tab.bought_items)
+        self.assertEqual({"Chips": 1}, self.janes_tab.bought_items)
+        self.assertEqual(4.00, self.janes_tab.total_spent)
+
         self.janes_tab.add_to_tab(self.chips)
-        self.assertEqual({self.chips.name: 2}, self.janes_tab.bought_items)
+        self.assertEqual({"Chips": 2}, self.janes_tab.bought_items)
+        self.assertEqual(8.00, self.janes_tab.total_spent)
+
         self.janes_tab.add_to_tab(self.gin_tonic)
-        self.assertEqual({self.chips.name: 2, self.gin_tonic.name: 1}, self.janes_tab.bought_items)
+        self.assertEqual({"Chips": 2, self.gin_tonic.name: 1}, self.janes_tab.bought_items)
+        self.assertEqual(14.00, self.janes_tab.total_spent)
+
         self.janes_tab.add_to_tab(self.gin_tonic)
-        self.assertEqual({self.chips.name: 2, self.gin_tonic.name: 2}, self.janes_tab.bought_items)
-    
+        self.assertEqual({"Chips": 2, self.gin_tonic.name: 2}, self.janes_tab.bought_items)
+        self.assertEqual(20.00, self.janes_tab.total_spent)

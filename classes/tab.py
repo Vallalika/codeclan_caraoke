@@ -10,3 +10,5 @@ class Tab:
             self.bought_items[item.name] +=1
         else:
             self.bought_items[item.name] = 1
+        
+        self.total_spent += item.price

@@ -9,6 +9,9 @@ class Guest:
     
     def pay_entry_fee(self, room):
         self.money -= room.entry_fee.price
+    
+    def buy_item(self, item):
+        self.money -= item.price
 
     def song_cheer(self):
         return self.name+": Yeaaaaaaaaaahhhhhh!!!!!!!!!!!!!!!!!!!!!!"
