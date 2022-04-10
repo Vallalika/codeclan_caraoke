@@ -16,6 +16,7 @@ class TestGuest(unittest.TestCase):
         self.assertEqual("Jane",self.jane.name)
         self.assertEqual(50.00,self.jane.money)
         self.assertEqual(self.lazy_song,self.jane.favourite_song)
+        self.assertIsNone(self.jane.tab)
         self.assertEqual(False, self.jane.has_cheered)
     
     # @unittest.skip

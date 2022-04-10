@@ -28,6 +28,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual("Room 1", self.room_1.name)
         self.assertEqual(3, self.room_1.capacity)
         self.assertEqual(0, self.room_1.number_of_guests_in)
+        self.assertEqual([], self.room_1.tab_list)
     
     # @unittest.skip
     def test_check_in_if_enough_space(self):
@@ -38,6 +39,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(3, self.room_1.number_of_guests_in)
         self.assertEqual(3, self.room_1.capacity)
         self.assertEqual([self.jane,self.gary,self.alison], self.room_1.guest_list)
+        # self.assertEqual([self.room_1.tab_list]), self.room_1.tab_list)
     
     # @unitest.skip
     def test_check_in_if_NOT_enough_space(self):

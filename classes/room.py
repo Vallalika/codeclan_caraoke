@@ -1,3 +1,5 @@
+from classes.tab import Tab
+
 class Room:
 
     def __init__(self, input_name, input_capacity):
@@ -5,14 +7,17 @@ class Room:
         self.capacity = input_capacity
         self.number_of_guests_in = 0
         self.guest_list = []
+        self.tab_list = []
         self.playlist = []
+        self.money_made = 0.00
         self.entry_fee = 10.00
-        self.money_made = 0
     
     def guest_checkin(self, guest):
         if (self.capacity > self.number_of_guests_in) and (guest.money >= self.entry_fee):
             self.number_of_guests_in += 1
             self.guest_list.append(guest)
+            # self.guest.tab = Tab(guest)
+            # self.guest.tab.
             guest.pay_entry_fee(self)
             self.money_made += self.entry_fee
             if guest.favourite_song in self.playlist:
